@@ -1,5 +1,2 @@
 #!/bin/bash
-
-base_name=$(basename "$CFILE" .c)
-
-gcc -S -masm=intel -o "$base_name.s" "$CFILE"
+gcc -S -masm=intel -o "${CFILE%.c}.s" "$CFILE"
