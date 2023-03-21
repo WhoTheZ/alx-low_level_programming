@@ -4,7 +4,7 @@
  * @c:  parameter to be checked
  *
  * Return: 1 if it is an alphabet
- * Return: always 0
+ * otherwise 0
 */
 
 int _isalpha(int c)
