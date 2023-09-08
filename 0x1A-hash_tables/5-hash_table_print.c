@@ -1,26 +1,44 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 #include "hash_tables.h"
 
 /**
- * main - check the code
- *
- * Return: Always EXIT_SUCCESS.
+ * hash_table_print - prints a hash table
+ * @ht: Hash table
+ * Return: void
  */
-int main(void)
+void hash_table_print(const hash_table_t *ht)
 {
-    hash_table_t *ht;
+	unsigned long int i = 0;
+	int flag = 0;
+	hash_node_t *current;
 
-    ht = hash_table_create(1024);
-    hash_table_print(ht);
-    hash_table_set(ht, "c", "fun");
-    hash_table_set(ht, "python", "awesome");
-    hash_table_set(ht, "Bob", "and Kris love asm");
-    hash_table_set(ht, "N", "queens");
-    hash_table_set(ht, "Asterix", "Obelix");
-    hash_table_set(ht, "Betty", "Cool");
-    hash_table_set(ht, "98", "Battery Street");
-    hash_table_print(ht);
-    return (EXIT_SUCCESS);
+	if (!ht)
+		return;
+	printf("{");
+	while (i < ht->size)
+	{
+		if (ht->array[i])
+		{
+			if (!ht->array[i]->next)
+			{
+				if (flag)
+					printf(", ");
+				printf("'%s': '%s'", ht->array[i]->key, ht->array[i]->value);
+				flag = 1;
+			}
+			else
+			{
+				current = ht->array[i];
+				while (current)
+				{
+					if (flag)
+						printf(", ");
+					printf("'%s': '%s'", current->key, current->value);
+					flag = 1;
+					current = current->next;
+				}
+			}
+		}
+		i++;
+	}
+	printf("}\n");
 }
